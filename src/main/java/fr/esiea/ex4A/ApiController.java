@@ -11,22 +11,19 @@ import java.util.ArrayList;
 public class ApiController {
 
     private final UserRepository userRepository;
-    ApiController(UserRepository userRepository) {
+    private final AgifyService agifyService;
+    ApiController(UserRepository userRepository, AgifyService agifyService) {
         this.userRepository = userRepository;
+        this.agifyService = agifyService;
     }
 
     @PostMapping(path = "api/inscription")
     void inscription(@RequestBody User user) {
         userRepository.addUser(user);
-        System.out.println(user);
-        System.out.println(userRepository.users.size());
-        System.out.println(userRepository.users.get(userRepository.users.size()-1));
     }
 
     @GetMapping("api/matches")
     String match(@RequestParam(name="userName") String username, @RequestParam(name="userCountry") String country) throws JSONException {
-        System.out.println(country);
-        System.out.println(username);
         ArrayList<User> userMatch = userRepository.getByCountry(country, userRepository.getByUsername(username, userRepository.users));
         JSONArray array = new JSONArray();
         for (User user : userMatch) {
@@ -35,7 +32,6 @@ public class ApiController {
             item.put("twitter", user.twitter);
             array.put(item);
         }
-        return array.toString() ;
-
+        return array.toString();
     }
 }
