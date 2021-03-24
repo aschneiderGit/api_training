@@ -11,16 +11,15 @@ import java.util.ArrayList;
 public class ApiController {
 
     private final UserRepository userRepository;
-    ApiController(UserRepository userRepository) {
+    private final AgifyService agifyService;
+    ApiController(UserRepository userRepository, AgifyService agifyService) {
         this.userRepository = userRepository;
+        this.agifyService = agifyService;
     }
 
     @PostMapping(path = "api/inscription")
     void inscription(@RequestBody User user) {
         userRepository.addUser(user);
-        System.out.println(user);
-        System.out.println(userRepository.users.size());
-        System.out.println(userRepository.users.get(userRepository.users.size()-1));
     }
 
     @GetMapping("api/matches")

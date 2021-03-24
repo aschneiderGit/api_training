@@ -14,9 +14,10 @@ public class Launcher {
     }
 
     @Bean
-    AgifyService agifyClient() {
+    AgifyService agifyService() {
         Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("https://api.github.com/")
+            .baseUrl("https://api.agify.io/")
+            .addConverterFactory(JacksonConverterFactory.create())
             .build();
 
         return retrofit.create(AgifyService.class);
