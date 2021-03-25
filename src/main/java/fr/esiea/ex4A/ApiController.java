@@ -5,26 +5,25 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 @RestController
 public class ApiController {
 
-    private final UserRepository userRepository;
-    private final AgifyClient agifyClient;
-    ApiController(UserRepository userRepository, AgifyClient agifyClient) {
-        this.userRepository = userRepository;
-        this.agifyClient = agifyClient;
+    private final AgifyService agifyService;
+    ApiController(AgifyService agifyService) {
+        this.agifyService = agifyService;
     }
 
     @PostMapping(path = "api/inscription")
-    void inscription(@RequestBody User user) {
-        userRepository.addUser(user);
+    void inscription(@RequestBody User user) throws IOException {
+        agifyService.addUser(user);
     }
 
     @GetMapping("api/matches")
-    String match(@RequestParam(name="userName") String username, @RequestParam(name="userCountry") String country) throws JSONException {
-        ArrayList<User> userMatch = userRepository.getByCountry(country, userRepository.getByUsername(username, userRepository.users));
+    String match(@RequestParam(name="mail") String mail) throws JSONException {
+        ArrayList<User> userMatch = agifyService.matchFor(mail);
         JSONArray array = new JSONArray();
         for (User user : userMatch) {
             JSONObject item = new JSONObject();

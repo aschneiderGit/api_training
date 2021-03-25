@@ -21,7 +21,7 @@ public class ApiControllerIT {
     private final MockMvc mockMvc;
 
     @MockBean
-    private  UserRepository repository;
+    private  AgifyService agifyService;
 
     ApiControllerIT(@Autowired MockMvc mockMvc) {
         this.mockMvc = mockMvc;
@@ -34,7 +34,7 @@ public class ApiControllerIT {
         ArgumentCaptor<User> argumentCaptor = ArgumentCaptor.forClass(User.class);
         mockMvc
             .perform(MockMvcRequestBuilders.post("/api/inscription/").contentType(MediaType.APPLICATION_JSON).content(requestJSON));
-        verify(repository).addUser(argumentCaptor.capture());
+        verify(agifyService).addUser(argumentCaptor.capture());
         Assertions.assertEquals(user, argumentCaptor.getValue());
     }
 }
