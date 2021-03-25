@@ -4,23 +4,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
 @RestController
 public class ApiController {
 
-<<<<<<< HEAD
     private final AgifyService agifyService;
 
     ApiController(AgifyService agifyService) {
-=======
-    private final UserRepository userRepository;
-    private final AgifyService agifyService;
-    ApiController(UserRepository userRepository, AgifyService agifyService) {
-        this.userRepository = userRepository;
->>>>>>> 0194137... test retrofit done
         this.agifyService = agifyService;
     }
 

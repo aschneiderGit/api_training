@@ -2,6 +2,7 @@ package fr.esiea.ex4A;
 
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import retrofit2.Call;
 
 import java.util.ArrayList;
 
@@ -22,11 +24,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class ApiControllerIT {
 
-    private final Launcher mock = new Launcher();
-    private final MockMvc mockMvc;
+     final Launcher mock = new Launcher();
+     final MockMvc mockMvc;
 
     @MockBean
-    private  AgifyService agifyService = new AgifyService(mock.agifyClient(), new UserRepository());
+    AgifyService agifyService;
 
     ApiControllerIT(@Autowired MockMvc mockMvc) {
         this.mockMvc = mockMvc;
@@ -45,19 +47,12 @@ public class ApiControllerIT {
 
     @Test
     void get_match() throws Exception {
-        User user1 = new User("test@test.com", "Fabien", "test", "FR", "M", "F");
-        UserAgify userA1 = new UserAgify("Fabien", 22, 10, "FR");
-        User user2 = new User("test@test.com", "Julie", "test", "FR", "F", "M");
-        UserAgify userA2 = new UserAgify("Julie", 22, 10, "FR");
-        User user3 = new User("test@test.com", "Marie", "test", "FR", "F", "M");
-        UserAgify userA3 = new UserAgify("test3", 32, 10, "FR");
-        agifyService.userRepository.addUser(user1, userA1);
-        agifyService.userRepository.addUser(user2, userA2);
-        agifyService.userRepository.addUser(user3, userA3);
+        ArgumentCaptor<String> argumentCaptor = ArgumentCaptor.forClass(String.class);
         mockMvc
             .perform(MockMvcRequestBuilders.get("/api/matches?userName=Fabien&userCountry=FR"))
             .andExpect(status().isOk());
-            //.andExpect(content().json());
-
+        verify(agifyService).matchFor(argumentCaptor.capture(), argumentCaptor.capture());
+        Assertions.assertEquals("Fabien", argumentCaptor.getAllValues().get(0));
+        Assertions.assertEquals("FR", argumentCaptor.getAllValues().get(1));
     }
 }
