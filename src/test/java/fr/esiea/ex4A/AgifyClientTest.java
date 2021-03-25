@@ -9,10 +9,10 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 import java.io.IOException;
 
 
-public class AgifyServiceTest {
+public class AgifyClientTest {
 
     @Test
-    void agifyService_testIT() throws IOException {
+    void agifyClient_testIT() throws IOException {
         String name = "Aimé";
         String country = "FR";
         Retrofit retrofit = new Retrofit.Builder()
@@ -20,9 +20,9 @@ public class AgifyServiceTest {
             .addConverterFactory(JacksonConverterFactory.create())
             .build();
 
-        AgifyService agifyService = retrofit.create(AgifyService.class);
+        AgifyClient agifyClient = retrofit.create(AgifyClient.class);
 
-        Response<UserAgify> execute = agifyService.test(name, country).execute();
+        Response<UserAgify> execute = agifyClient.test(name, country).execute();
         UserAgify user = execute.body();
         Assertions.assertNotNull(user);
         Assertions.assertEquals(user.name, name);
