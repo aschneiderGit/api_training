@@ -22,7 +22,7 @@ public class AgifyClientTest {
 
         AgifyClient agifyClient = retrofit.create(AgifyClient.class);
 
-        Response<UserAgify> execute = agifyClient.test(name, country).execute();
+        Response<UserAgify> execute = agifyClient.getUserAgify(name, country).execute();
         UserAgify user = execute.body();
         Assertions.assertNotNull(user);
         Assertions.assertEquals(user.name, name);
