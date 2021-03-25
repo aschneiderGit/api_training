@@ -11,10 +11,10 @@ import java.util.ArrayList;
 public class ApiController {
 
     private final UserRepository userRepository;
-    private final AgifyService agifyService;
-    ApiController(UserRepository userRepository, AgifyService agifyService) {
+    private final AgifyClient agifyClient;
+    ApiController(UserRepository userRepository, AgifyClient agifyClient) {
         this.userRepository = userRepository;
-        this.agifyService = agifyService;
+        this.agifyClient = agifyClient;
     }
 
     @PostMapping(path = "api/inscription")
