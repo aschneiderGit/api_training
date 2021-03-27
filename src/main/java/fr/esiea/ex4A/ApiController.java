@@ -4,9 +4,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
-
 import java.io.IOException;
-import java.util.ArrayList;
+
 
 @RestController
 public class ApiController {

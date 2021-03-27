@@ -28,6 +28,7 @@ public class ApiControllerIT {
     @MockBean
     private  AgifyService agifyService = new AgifyService(mock.agifyClient(), new UserRepository());
 
+
     ApiControllerIT(@Autowired MockMvc mockMvc) {
         this.mockMvc = mockMvc;
     }
@@ -40,6 +41,7 @@ public class ApiControllerIT {
         mockMvc
             .perform(MockMvcRequestBuilders.post("/api/inscription/").contentType(MediaType.APPLICATION_JSON).content(requestJSON));
         verify(agifyService).addUser(argumentCaptor.capture());
+
         Assertions.assertEquals(user, argumentCaptor.getValue());
     }
 

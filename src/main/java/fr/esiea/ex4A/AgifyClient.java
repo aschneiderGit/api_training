@@ -8,6 +8,4 @@ public interface AgifyClient {
 
     @GET("?")
     Call<UserAgify> getUserAgify(@Query("name") String username, @Query("country_id") String country);
-
-
-    }
+}
