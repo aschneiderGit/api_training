@@ -9,7 +9,7 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 import java.io.IOException;
 
 
-public class AgifyClientTest {
+public class AgifyClientIT {
 
     @Test
     void agifyClient_testIT() throws IOException {

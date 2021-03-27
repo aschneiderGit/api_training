@@ -37,30 +37,4 @@ public class UserRepository {
         }
         return  filtredUsers;
     }
-
-    public ArrayList<User> getByUsername(String username, ArrayList<User> userList){
-        ArrayList<User> matchUsers = new ArrayList<User>();
-        System.out.println("username");
-        for (User u: userList) {
-            if (u.username.equals(username))
-            {
-                matchUsers.add(u);
-                System.out.println("add name");
-            }
-        }
-        return matchUsers;
-    }
-
-    public ArrayList<User> getByCountry(String country, ArrayList<User> userList){
-        ArrayList<User> matchUsers = new ArrayList<User>();
-        System.out.println("country");
-        for (User u: userList) {
-            if (u.country.equals(country))
-            {
-                matchUsers.add(u);
-                System.out.println("add country");
-            }
-        }
-        return matchUsers;
-    }
 }

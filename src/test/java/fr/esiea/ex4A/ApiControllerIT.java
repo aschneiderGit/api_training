@@ -24,7 +24,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class ApiControllerIT {
 
-     final Launcher mock = new Launcher();
      final MockMvc mockMvc;
 
     @MockBean

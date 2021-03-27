@@ -3,7 +3,6 @@ package fr.esiea.ex4A;
 import org.junit.BeforeClass;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -48,14 +47,17 @@ public class UserRepositoryTest {
         User user3 = new User("test@test.com", "test3", "test", "FR", "F", "M");
         UserAgify userA3 = new UserAgify("test3", 32, 10, "FR");
         userRepository.addUser(user3, userA3);
-
-
+        User user4 = new User("test@test.com", "test3", "test", "FR", "F", "F");
+        UserAgify userA4 = new UserAgify("test3", 32, 10, "FR");
+        userRepository.addUser(user4, userA4);
         ArrayList<User> usersList = userRepository.matchUsers(user1);
         Assertions.assertTrue(usersList.contains(user2));
         Assertions.assertFalse(usersList.contains(user3));
+        Assertions.assertFalse(usersList.contains(user4));
         usersList = userRepository.matchUsers(user2);
         Assertions.assertTrue(usersList.contains(user1));
         Assertions.assertFalse(usersList.contains(user3));
+<<<<<<< HEAD
 
 
 =======
@@ -115,5 +117,8 @@ public class UserRepositoryTest {
 
 
 >>>>>>> 12164be... test for get
+=======
+        Assertions.assertFalse(usersList.contains(user4));
+>>>>>>> 1e11f29... rise pourcent codecov
     }
 }
