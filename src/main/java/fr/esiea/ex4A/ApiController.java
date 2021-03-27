@@ -33,17 +33,4 @@ public class ApiController {
         }
         return array.toString();
     }
-
-    @GetMapping("api/matches")
-    String match(@RequestParam(name="userName") String username, @RequestParam(name="userCountry") String country) throws JSONException {
-        ArrayList<User> userMatch = userRepository.getByCountry(country, userRepository.getByUsername(username, userRepository.users));
-        JSONArray array = new JSONArray();
-        for (User user : userMatch) {
-            JSONObject item = new JSONObject();
-            item.put("name", user.username);
-            item.put("twitter", user.twitter);
-            array.put(item);
-        }
-        return array.toString();
-    }
 }

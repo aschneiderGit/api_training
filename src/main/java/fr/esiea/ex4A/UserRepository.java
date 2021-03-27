@@ -20,17 +20,11 @@ public class UserRepository {
     }
 
     public ArrayList<User> matchUsers(User user){
-
         ArrayList<User> filtredUsers = new ArrayList<User>();
-        int age = userAs.get(user.getId()).age;
-        String sexPref = user.sexPref;
-        String mySex = user.sex;
         for(Map.Entry<String, UserAgify> userA : userAs.entrySet()) {
-            if (userA.getValue().age > age - 4 && userA.getValue().age < age + 4 )
-            {
+            if (userA.getValue().age > userAs.get(user.getId()).age - 4 && userA.getValue().age < userAs.get(user.getId()).age + 4 ) {
                 User userSelect = users.get(userA.getKey());
-                if (userSelect.sex.equals(sexPref) && userSelect.sexPref.equals(mySex) )
-                {
+                if (userSelect.sex.equals(user.sexPref) && userSelect.sexPref.equals(user.sex) ) {
                     filtredUsers.add(userSelect);
                 }
             }
