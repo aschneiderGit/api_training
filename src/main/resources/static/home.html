@@ -15,7 +15,7 @@
     function getParameterByName(name, url = window.location.href) {
         name = name.replace(/[\[\]]/g, '\\$&');
         var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-        results = regex.exec(url);
+            results = regex.exec(url);
         if (!results) return null;
         if (!results[2]) return '';
         return decodeURIComponent(results[2].replace(/\+/g, ' '));
@@ -55,10 +55,10 @@
 
     function loadMatches() {
         var userName = getParameterByName('name');
-        var mail = getParameterByName('mail');
+        var userCountry = getParameterByName('country');
 
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', '/api/matches?mail=' + encodeURIComponent(mail), true);
+        xhr.open('GET', '/api/matches?userName=' + encodeURIComponent(userName) + "&userCountry=" + encodeURIComponent(userCountry), true);
         xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
         xhr.onreadystatechange = () => updateMatches(xhr);
         xhr.send();

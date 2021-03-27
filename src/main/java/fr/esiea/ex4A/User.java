@@ -22,6 +22,10 @@ public class User {
         this.sex = sex;
         this.sexPref = sexPref;
     }
+
+    public String getId(){
+        return username + country;
+    }
     @Override
     public String toString() {
         return "User{" +

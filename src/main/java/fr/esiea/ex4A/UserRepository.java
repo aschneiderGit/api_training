@@ -15,14 +15,14 @@ public class UserRepository {
     private final Integer AGE_GAP = 4;
 
      public void addUser(User user, UserAgify userA) {
-        users.put(user.mail,user);
-        userAs.put(user.mail, userA);
+        users.put(user.getId(), user);
+        userAs.put(user.getId(), userA);
     }
 
     public ArrayList<User> matchUsers(User user){
 
         ArrayList<User> filtredUsers = new ArrayList<User>();
-        int age = userAs.get(user.mail).age;
+        int age = userAs.get(user.getId()).age;
         String sexPref = user.sexPref;
         String mySex = user.sex;
         for(Map.Entry<String, UserAgify> userA : userAs.entrySet()) {

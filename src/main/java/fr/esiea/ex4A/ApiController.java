@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class ApiController {
 
     private final AgifyService agifyService;
+
     ApiController(AgifyService agifyService) {
         this.agifyService = agifyService;
     }
@@ -22,8 +23,8 @@ public class ApiController {
     }
 
     @GetMapping("api/matches")
-    String match(@RequestParam(name="mail") String mail) throws JSONException {
-        ArrayList<User> userMatch = agifyService.matchFor(mail);
+    String match(@RequestParam(name="userName") String userName, @RequestParam(name="userCountry") String userCountry) throws JSONException {
+        ArrayList<User> userMatch = agifyService.matchFor(userName, userCountry);
         JSONArray array = new JSONArray();
         for (User user : userMatch) {
             JSONObject item = new JSONObject();

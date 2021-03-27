@@ -23,9 +23,9 @@ public class AgifyService {
         userRepository.addUser(user, userA);
     }
 
-    public ArrayList<User> matchFor(String mail)
+    public ArrayList<User> matchFor(String username, String country)
     {
-        User user = userRepository.users.get(mail);
+        User user = userRepository.users.get(username + country);
         if (user != null) {
             return userRepository.matchUsers(user);
         }
