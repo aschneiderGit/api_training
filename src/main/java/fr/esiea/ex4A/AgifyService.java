@@ -20,8 +20,10 @@ public class AgifyService {
     }
 
     public void addUser(User user) throws IOException {
-        UserAgify userA = agifyClient.getUserAgify(user.username, user.country).execute().body();
-        userRepository.addUser(user, userA);
+        if (userRepository.users.get(user.getId()) == null) {
+            UserAgify userA = agifyClient.getUserAgify(user.username, user.country).execute().body();
+            userRepository.addUser(user, userA);
+        }
     }
 
     public ArrayList<User> matchFor(String username, String country)
